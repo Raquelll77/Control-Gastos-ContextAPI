@@ -5,6 +5,7 @@ import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css'
 import 'react-calendar/dist/Calendar.css'
 import ErrorMessage from "./ErrorMessage";
+import { useBudget } from "../hooks/useBudget";
 
 export default function ExpenseForm() {
 
@@ -14,6 +15,8 @@ export default function ExpenseForm() {
     category: '',
     date: new Date()
   })
+
+  const {dispatch} = useBudget()
 
   const [error, setError] = useState('')
 
@@ -41,7 +44,10 @@ export default function ExpenseForm() {
       setError('Todos los campos son obligatorios')
       return
     }
-    console.log('todo bien')
+    
+    //agregar nuevo gasto
+    dispatch({type: 'add-expense', payload: {expense} })
+
   }
 
   
