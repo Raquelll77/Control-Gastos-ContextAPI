@@ -4,7 +4,7 @@ import ExpenseDetail from "./ExpenseDetail"
 export default function ExpenseList() {
   const {state} = useBudget()
 
-  const isEmpty = useMemo(() => state.expenses.length === 0, state.expenses)
+  const isEmpty = useMemo(() => state.expenses.length === 0, [state.expenses])
 
   
 
