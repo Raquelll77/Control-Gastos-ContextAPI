@@ -9,7 +9,8 @@ export type BudgetActions =
 { type: 'add-expense', payload: {expense: DraftExpense}} |
 { type: 'remove-expense', payload: {id: Expense['id']} } |
 { type: 'get-expense-by-id', payload: {id: Expense['id']}} |
-{ type: 'update-expense', payload: {expense: Expense}}
+{ type: 'update-expense', payload: {expense: Expense}} |
+{ type: 'reset-app' }
 
 
 export type BudgetState = {
@@ -22,19 +23,19 @@ export type BudgetState = {
 const localStorageBudget = (): number => {
     const budget = localStorage.getItem('budget');
     return budget ? JSON.parse(budget) : 0;
-  };
+};
    
-  const localStorageExpenses = (): Expense[] => {
+const localStorageExpenses = (): Expense[] => {
     const expenses = localStorage.getItem('expenses');
     return expenses ? JSON.parse(expenses) : [];
-  };
+};
    
-  export const initialState: BudgetState = {
+export const initialState: BudgetState = {
     budget: localStorageBudget(),
     modal: false,
     expenses: localStorageExpenses(),
     editingId: '',
-  };
+};
 
 const createExpense = (drafExpense : DraftExpense) :Expense =>{
 
@@ -97,6 +98,14 @@ export const budgetReducer = (
             expenses: state.expenses.map(expense => expense.id === action.payload.expense.id ? action.payload.expense : expense),
             modal: false,
             editingId: ''
+        }
+    }
+
+    if(action.type === 'reset-app'){
+        return{
+            ...state,
+            budget: 0,
+            expenses: []
         }
     }
     return state
