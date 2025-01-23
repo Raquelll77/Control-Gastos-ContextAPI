@@ -78,7 +78,7 @@ useEffect(() => {
 
   return (
     <form action="" className="space-y-5" onSubmit={handleSubmit}>
-      <legend className="uppercase text-center text-2xl font-black border-b-4 py-2 border-blue-500">Nuevo Gasto</legend>
+      <legend className="uppercase text-center text-2xl font-black border-b-4 py-2 border-blue-500">{state.editingId ? 'Guardar Cambios' : 'Nuevo Gasto'}</legend>
 
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <div className="flex flex-col gap-2">
@@ -148,7 +148,7 @@ useEffect(() => {
       <input 
         type="submit"
         className="bg-blue-600 hover:bg-blue-700 cursor-pointer w-full p-2 text-white uppercase rounded-lg font-bold" 
-        value={'Registrar Gasto'}
+        value={state.editingId ? 'Guardar Cambios' : 'Registrar Gasto'}
       />
     </form>
 
